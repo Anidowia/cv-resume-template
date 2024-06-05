@@ -1,0 +1,14 @@
+.container {
+    &__button {
+    background-color: #222935;
+    border-radius: 5px;
+    color: white;
+    height: 40px;
+    width: 127px; 
+    font-size: 16px;
+    border: none;
+    &:hover {
+        background-color:#26C17E
+    }
+    }
+}
