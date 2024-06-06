@@ -1,29 +1,43 @@
 .navigation {
-    position: relative;
+    position: fixed; 
+    left: 0; 
     width: 250px;
-    height: 100%;
-    color:#667081;
-    background-color: #222935; 
+    color: #667081;
+    background-color: #222935;
     padding: 20px;
     display: flex;
     flex-direction: column;
     text-align: center;
+    transition: transform 0.7s ease;
+    transform: translateX(0);
+    height: 100vh;
+
+    &.closed {
+        transform: translateX(-100%);
+    }
+
     h1 {
         font-size: 16px;
     }
+
     & img {
         width: 100px;
         height: 100px;
     }
+
     &__back {
         color: white;
     }
+    a {
+        text-decoration: none;
+    }
+
     &__burger {
         display: block;
         cursor: pointer;
         position: absolute;
-        margin: 0 auto;
-        left: 100%;
+        top: 20px;
+        left: 289px;
         & span {
             display: block;
             width: 25px;
@@ -36,7 +50,6 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
             width: 40px;
             height: 40px;
             background-color: #222935;
