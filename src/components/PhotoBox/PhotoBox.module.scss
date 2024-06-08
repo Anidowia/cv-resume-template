@@ -1,6 +1,5 @@
-.photo-box {
+.photoBox {
     color: #eee;
-    background-size: cover;
     h1 {
         font-size: 45px;
         font-weight: 700;
@@ -11,14 +10,25 @@
     p {
         font-size: 14px;
     }
-    &__avatar {
-        &-logo {
+    .avatar {
+        .logo {
             border-radius: 50%;
-            width: 163px;
-            height: 163px;
             object-fit: cover;
             border-color: white;
             border: 1px solid white;
+        }
+    }
+}
+.big {
+    img {
+        width: 163px;
+        height: 163px;
+    }
+}
+@media (max-width: 600px) {
+    .photoBox {
+        .avatar {
+            padding: 0 0 45px;
         }
     }
 }

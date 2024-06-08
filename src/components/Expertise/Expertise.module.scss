@@ -1,0 +1,39 @@
+@import "../../assets/styles/modules/variables.module.scss";
+@import "../../assets/styles/modules/mixins.module.scss";
+
+.expertise {
+    @include shifted-box();
+    
+    h1 {
+        @include heading();
+    }
+    h3, p {
+        color: $textColor
+    }
+    h3, h4 {
+        margin: 10px 0;
+        font-size: 16px;
+    }
+    p {
+        @include text();
+    }
+
+    .expertise__content {
+        display: grid;
+        grid-template-columns: 10% 90%;
+        gap: 23px;
+
+        .item {
+            display: contents; 
+    
+            .date {
+                grid-column: 1; 
+                color: $sidebarColor;
+            }
+        
+            .info {
+                grid-column: 2; 
+            }
+        }
+    }
+}

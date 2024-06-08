@@ -1,16 +1,12 @@
-@import "modules/variables.module.scss";
-@import "Box.module.scss";
+@import "../../assets/styles/modules/variables.module.scss";
+@import "../../assets/styles/modules/mixins.module.scss";
 
 .timeline {
     position: relative;
-    @extend .box;
+    @include shifted-box();
     
     h1 {
-        color: $headingColor;
-    }
-
-    &Shifted {
-        @extend .boxShifted;
+        @include heading();
     }
 
     &__event {
@@ -19,7 +15,7 @@
         width: 100%;
         display: flex;
 
-        &-date {
+        .date {
             position: relative;
             width: 100px;
             font-size: 14px;
@@ -38,9 +34,9 @@
             }
         }
 
-        &-content {
+        .content {
             position: relative;
-            padding: 15px 0px 25px 20px;
+            padding: 15px 30px 20px 20px;
             background: #EEEEEE;
             border-radius: 4px;
             flex: 1;
@@ -62,9 +58,20 @@
             }
 
             p {
-                font-size: 14px;
-                color: $textColor;
-                margin: 0;
+                @include text();
+            }
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .timeline {
+        &__event {
+            .date {
+                &::after {
+                    
+                    height: 300px;
+                }
             }
         }
     }

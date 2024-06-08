@@ -1,4 +1,4 @@
-import styles from "../../assets/styles/Button.module.scss";
+import styles from "./Button.module.scss";
 
 const Button = ({ text, onClick }) => {
 	const handleClick = () => {

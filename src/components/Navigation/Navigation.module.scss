@@ -1,0 +1,27 @@
+@import "../../assets/styles/modules/variables.module.scss";
+
+.navigation {
+    display: flex;
+    align-items: center;
+    padding: 10px 50px 15px 20px;
+    cursor: pointer;
+        
+    &:hover {
+        color: $headingColor;
+    }
+
+    &__icon {
+        margin-right: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+}
+
+@media (max-width: 600px) {
+    .navigation {
+        padding: 15px;
+    }
+}
+

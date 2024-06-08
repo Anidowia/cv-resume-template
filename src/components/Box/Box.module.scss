@@ -1,0 +1,15 @@
+@import "../../assets/styles/modules/variables.module.scss";
+@import "../../assets/styles/modules/mixins.module.scss";
+
+.box {
+    @include shifted-box();
+
+    h1 {
+        @include heading();
+    }
+    p {
+        @include text();
+    }
+
+}
+
