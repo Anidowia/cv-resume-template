@@ -2,7 +2,7 @@ import styles from "./Expertise.module.scss";
 
 const Expertise = ({ title, isClosed, data }) => {
 	return (
-		<div
+		<section
 			className={`${styles.expertise} ${isClosed ? styles.expertiseShifted : ""}`}
 			id="experience"
 		>
@@ -21,7 +21,7 @@ const Expertise = ({ title, isClosed, data }) => {
 					</div>
 				))}
 			</div>
-		</div>
+		</section>
 	);
 };
 

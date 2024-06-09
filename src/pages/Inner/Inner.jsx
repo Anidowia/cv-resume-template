@@ -55,7 +55,7 @@ const Inner = () => {
 		setIsClosed(!isClosed);
 	};
 	return (
-		<div>
+		<main>
 			<div className={styles["inner"]}>
 				<Panel isClosed={isClosed} toggleSidebar={toggleSidebar} />
 				<div className={styles["inner__content"]}>
@@ -75,7 +75,7 @@ const Inner = () => {
 					<Feedback title="Feedbacks" isClosed={isClosed} />
 				</div>
 			</div>
-		</div>
+		</main>
 	);
 };
 

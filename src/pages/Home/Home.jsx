@@ -14,7 +14,7 @@ const Home = () => {
 	};
 
 	return (
-		<div className={styles["home"]}>
+		<section className={styles["home"]}>
 			<PhotoBox
 				name="Dina Sherubayeva"
 				title="Programmer. Creative. Innovator"
@@ -25,7 +25,7 @@ const Home = () => {
 			<div className={styles["home__button"]}>
 				<Button text="Know more" onClick={handleClick} />
 			</div>
-		</div>
+		</section>
 	);
 };
 

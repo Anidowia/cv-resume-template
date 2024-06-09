@@ -1,0 +1,33 @@
+.burger__back {
+    display: block;
+    cursor: pointer;
+    position: relative;
+
+    .arrow {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        right: 50px;
+        flex-direction: column;
+        justify-content: center;
+        width: 40px;
+        height: 41px;
+        background-color: #222935;
+        border-radius: 7px 7px 0 0;
+
+        &::before {
+            position: relative;
+            top: 5px;
+            left: 13px;
+            content: "";
+            width: 10px;
+            height: 10px;
+            border-right: 4px solid white;
+            border-top: 4px solid white;
+            transform: rotate(-45deg);
+        }
+    }
+}
+
+@media (max-width: 600px) {
+}

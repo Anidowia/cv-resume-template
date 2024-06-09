@@ -10,7 +10,6 @@
     flex-direction: column;
     text-align: center;
     transition: transform 0.7s ease;
-    transform: translateX(0);
     height: 100%;
 
     &.closed {
@@ -30,6 +29,22 @@
         position: absolute;
         bottom: 10px;
         left: 70px;
+
+        &, .navigation p {
+            color: white;
+    
+            &:hover {
+                color: $headingColor;
+            }
+        }
+    }
+
+    .links {
+        
+        ul {
+            list-style: none;
+            padding: 0;
+        }
     }
 
     a {
@@ -63,44 +78,6 @@
             border-radius: 0 7px 7px 0;
         }
     }
-
-    .burger__back {
-        display: block;
-        cursor: pointer;
-        position: absolute;
-        left: 1500px;
-        bottom: 0;
-
-        .arrow {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            width: 40px;
-            height: 41px;
-            background-color: #222935;
-            border-radius: 7px 7px 0 0;
-
-            &::before {
-                position: relative;
-                top: 5px;
-                left: 13px;
-                content: "";
-                width: 10px;
-                height: 10px;
-                border-right: 4px solid white;
-                border-top: 4px solid white;
-                transform: rotate(-45deg);
-            }
-        }
-    }
-
-    .panel__back, .navigation p {
-        color: white;
-
-        &:hover {
-            color: $headingColor;
-        }
-    }
 }
 
 @media (max-width: 600px) {
@@ -122,12 +99,10 @@
             border-radius: 9px;
             width: 60px;
             bottom: 35px;
-
-        }
-        
-        .burger__back {
-            left: 530px;
-            bottom: 20px;
+            &:hover {
+                background-color: white;
+                color: $headingColor;
+            }
         }
 
         img {
@@ -137,12 +112,6 @@
 
         .links span, p {
             display: none;
-        }
-        .panel__back {
-            &:hover {
-                background-color: white;
-                color: $headingColor;
-            }
         }
     }
 }

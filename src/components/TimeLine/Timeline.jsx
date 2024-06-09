@@ -2,7 +2,7 @@ import styles from "./Timeline.module.scss";
 
 const Timeline = ({ title, data, isClosed }) => {
 	return (
-		<div
+		<section
 			className={`${styles.timeline} ${isClosed ? styles.timelineShifted : ""}`}
 			id="education"
 		>
@@ -17,7 +17,7 @@ const Timeline = ({ title, data, isClosed }) => {
 					</div>
 				</div>
 			))}
-		</div>
+		</section>
 	);
 };
 

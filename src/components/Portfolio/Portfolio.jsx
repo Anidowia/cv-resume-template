@@ -1,27 +1,53 @@
 import React, { useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
+
 import Info from "../Info/Info";
 import styles from "./Portfolio.module.scss";
 
 const projects = [
-	{ title: "Project 1", category: "ui" },
-	{ title: "Project 2", category: "code" },
-	{ title: "Project 3", category: "ui" },
-	{ title: "Project 4", category: "code" },
+	{ id: uuidv4(), title: "Project 1", category: "ui" },
+	{ id: uuidv4(), title: "Project 2", category: "code" },
+	{ id: uuidv4(), title: "Project 3", category: "ui" },
+	{ id: uuidv4(), title: "Project 4", category: "code" },
+];
+
+const filterItems = [
+	{ label: "All", key: "all" },
+	{ label: "Code", key: "code" },
+	{ label: "UI", key: "ui" },
 ];
 
 const Portfolio = ({ title, isClosed }) => {
 	const [filterKey, setFilterKey] = useState("all");
-	const [projectsToShow, setProjectsToShow] = useState([]);
+	const [projectsToShow, setProjectsToShow] = useState(projects);
+	const [animationClass, setAnimationClass] = useState("");
+	const [initialRender, setInitialRender] = useState(true);
 
 	useEffect(() => {
-		if (filterKey === "all") {
-			setProjectsToShow(projects);
+		let timeout;
+
+		if (!initialRender) {
+			setAnimationClass(styles["shrink-out"]);
+
+			timeout = setTimeout(() => {
+				const filteredProjects =
+					filterKey === "all"
+						? projects
+						: projects.filter((project) => project.category === filterKey);
+				setProjectsToShow(filteredProjects);
+
+				setAnimationClass(styles["grow-in"]);
+			}, 400);
 		} else {
-			const filteredProjects = projects.filter(
-				(project) => project.category === filterKey
-			);
+			const filteredProjects =
+				filterKey === "all"
+					? projects
+					: projects.filter((project) => project.category === filterKey);
 			setProjectsToShow(filteredProjects);
+			setInitialRender(false);
 		}
+
+		return () => clearTimeout(timeout);
 	}, [filterKey]);
 
 	const handleFilterKeyChange = (key) => {
@@ -29,25 +55,24 @@ const Portfolio = ({ title, isClosed }) => {
 	};
 
 	return (
-		<div
+		<section
 			className={`${styles.portfolio} ${isClosed ? styles.portfolioShifted : ""}`}
 			id="skills"
 		>
 			<h1>{title}</h1>
 			<div className={styles["portfolio__links"]}>
-				<p onClick={() => handleFilterKeyChange("all")}>All</p>
-				<p> / </p>
-				<p onClick={() => handleFilterKeyChange("code")}>Code</p>
-				<p> / </p>
-				<p onClick={() => handleFilterKeyChange("ui")}>UI</p>
+				{filterItems.map((item, index) => (
+					<React.Fragment key={item.key}>
+						{index > 0 && <p> / </p>}
+						<p onClick={() => handleFilterKeyChange(item.key)}>{item.label}</p>
+					</React.Fragment>
+				))}
 			</div>
 			<div className={styles["portfolio__items"]}>
-				{projectsToShow.map((project, index) => (
+				{projectsToShow.map((project) => (
 					<div
-						key={index}
-						className={`${styles[`${project.category}`]} ${
-							filterKey === "all" || filterKey === project.category
-						}`}
+						key={project.id}
+						className={`${styles[`${project.category}`]} ${animationClass}`}
 					>
 						<div className={styles["info"]}>
 							<Info
@@ -58,7 +83,7 @@ const Portfolio = ({ title, isClosed }) => {
 					</div>
 				))}
 			</div>
-		</div>
+		</section>
 	);
 };
 

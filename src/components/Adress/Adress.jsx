@@ -12,12 +12,12 @@ import styles from "./Adress.module.scss";
 
 const Adress = ({ title, isClosed }) => {
 	return (
-		<div
+		<section
 			className={`${styles.adress} ${isClosed ? styles.adressShifted : ""}`}
 			id="contacts"
 		>
 			<h1>{title}</h1>
-			<div className={styles["adress__content"]}>
+			<nav className={styles["adress__content"]}>
 				<Navigation icon={<LocalPhone className={styles["icons-color"]} />}>
 					<a href="tel:+7772659414">
 						<b>777 265 9414</b>
@@ -44,8 +44,8 @@ const Adress = ({ title, isClosed }) => {
 					<h6>Telegram</h6>
 					<a href="https://t.me/anidowia">https://t.me/anidowia</a>
 				</Navigation>
-			</div>
-		</div>
+			</nav>
+		</section>
 	);
 };
 
