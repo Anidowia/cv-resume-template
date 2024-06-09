@@ -1,6 +1,17 @@
 @import "../../assets/styles/modules/variables.module.scss";
 @import "../../assets/styles/modules/mixins.module.scss";
 
+@keyframes slideInFromBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 @keyframes shrinkOut {
     0% {
         opacity: 1;
