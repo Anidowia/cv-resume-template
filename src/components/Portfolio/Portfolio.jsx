@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 import Info from "../Info/Info";
 import styles from "./Portfolio.module.scss";
@@ -20,34 +21,14 @@ const filterItems = [
 const Portfolio = ({ title, isClosed }) => {
 	const [filterKey, setFilterKey] = useState("all");
 	const [projectsToShow, setProjectsToShow] = useState(projects);
-	const [animationClass, setAnimationClass] = useState("");
-	const [initialRender, setInitialRender] = useState(true);
+	const nodeRefs = useRef(new Map());
 
 	useEffect(() => {
-		let timeout;
-
-		if (!initialRender) {
-			setAnimationClass(styles["shrink-out"]);
-
-			timeout = setTimeout(() => {
-				const filteredProjects =
-					filterKey === "all"
-						? projects
-						: projects.filter((project) => project.category === filterKey);
-				setProjectsToShow(filteredProjects);
-
-				setAnimationClass(styles["grow-in"]);
-			}, 400);
-		} else {
-			const filteredProjects =
-				filterKey === "all"
-					? projects
-					: projects.filter((project) => project.category === filterKey);
-			setProjectsToShow(filteredProjects);
-			setInitialRender(false);
-		}
-
-		return () => clearTimeout(timeout);
+		const filteredProjects =
+			filterKey === "all"
+				? projects
+				: projects.filter((project) => project.category === filterKey);
+		setProjectsToShow(filteredProjects);
 	}, [filterKey]);
 
 	const handleFilterKeyChange = (key) => {
@@ -68,21 +49,34 @@ const Portfolio = ({ title, isClosed }) => {
 					</React.Fragment>
 				))}
 			</div>
-			<div className={styles["portfolio__items"]}>
-				{projectsToShow.map((project) => (
-					<div
-						key={project.id}
-						className={`${styles[`${project.category}`]} ${animationClass}`}
-					>
-						<div className={styles["info"]}>
-							<Info
-								heading={project.title}
-								text="Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis."
-							/>
-						</div>
-					</div>
-				))}
-			</div>
+			<TransitionGroup className={styles["portfolio__items"]}>
+				{projectsToShow.map((project) => {
+					const nodeRef = React.createRef();
+					nodeRefs.current.set(project.id, nodeRef);
+					return (
+						<CSSTransition
+							key={project.id}
+							nodeRef={nodeRef}
+							timeout={400}
+							classNames={{
+								enter: styles["grow-in"],
+								enterActive: styles["grow-in-active"],
+								exit: styles["shrink-out"],
+								exitActive: styles["shrink-out-active"],
+							}}
+						>
+							<div ref={nodeRef} className={styles[`${project.category}`]}>
+								<div className={styles["info"]}>
+									<Info
+										heading={project.title}
+										text="Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis."
+									/>
+								</div>
+							</div>
+						</CSSTransition>
+					);
+				})}
+			</TransitionGroup>
 		</section>
 	);
 };

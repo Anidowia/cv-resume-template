@@ -1,0 +1,19 @@
+@import "../../../../assets/styles/modules/mixins.module.scss";
+@import "../../../../assets/styles/modules/variables.module.scss";
+
+.form {
+    border: 1px solid $headingColor;
+    padding: 10px;
+    border-radius: 5px;
+
+    .name, .range {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+    span {
+        color: red;
+        display: block;
+        padding: 15px 0;
+    }
+}

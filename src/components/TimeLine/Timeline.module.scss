@@ -29,7 +29,7 @@
                 top: 24px;
                 left: 47%;
                 width: 4px;
-                height: 105px;
+                height: 100%;
                 background: $headingColor;
             }
         }
@@ -65,14 +65,4 @@
 }
 
 @media (max-width: 600px) {
-    .timeline {
-        &__event {
-            .date {
-                &::after {
-                    
-                    height: 330px;
-                }
-            }
-        }
-    }
 }

@@ -2,6 +2,8 @@
 @import "../../assets/styles/modules/mixins.module.scss";
 
 .expertise {
+    position: relative;
+
     @include shifted-box();
     
     h1 {

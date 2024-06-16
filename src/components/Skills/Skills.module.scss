@@ -1,0 +1,23 @@
+@import "../../assets/styles/modules/variables.module.scss";
+@import "../../assets/styles/modules/mixins.module.scss";
+
+.skills {
+    @include shifted-box();
+    
+    h1 {
+        @include heading();
+    }
+
+    &-name {
+        display: flex;
+        justify-content: space-between;
+        align-items: center; 
+    }
+}
+
+.chartContainer {
+    height: 100%;
+}
+
+@media (max-width: 600px) {
+}

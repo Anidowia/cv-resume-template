@@ -23,7 +23,7 @@ const navItems = [
 	{ to: "education", icon: <School />, label: "Education" },
 	{ to: "experience", icon: <Create />, label: "Experience" },
 	{ to: "skills", icon: <Diamond />, label: "Skills" },
-	{ to: "workExperience", icon: <Work />, label: "Experience" },
+	{ to: "workExperience", icon: <Work />, label: "Portfolio" },
 	{ to: "contacts", icon: <NearMe />, label: "Contacts" },
 	{ to: "feedbacks", icon: <Chat />, label: "Feedbacks" },
 ];

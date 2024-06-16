@@ -36,7 +36,7 @@
 
 .portfolio {
     @include shifted-box();
-    
+
     h1 {
         @include heading();
     }
@@ -50,31 +50,35 @@
             color: $headingColor;
         }        
     }
+
     &__items {
         display: grid;
         gap: 20px;
-        grid-template-columns: repeat(4, 300px);
-        
-        .all, .ui {
-            background: url("../../assets/images/card_1.png"); 
-        }
-        .code {
-            background: url("../../assets/images/card_2.png"); 
-        }
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 
-        .all, .code, .ui {
+        .all, .ui, .code {
+            background-size: cover;
             border: 1px solid #DDDDDD; 
             padding: 95px; 
             border-radius: 3px;
-            background-size: cover;
             position: relative; 
-            overflow: hidden; 
+            overflow: hidden;
 
             &:hover .info { 
                 display: block; 
                 animation: slideInFromBottom 0.3s ease-out;
             } 
         }
+
+        .all, .ui {
+            background: url("../../assets/images/card_1.png");
+            background-size: cover;
+        }
+        .code {
+            background: url("../../assets/images/card_2.png");
+            background-size: cover;
+        }
+
         .info {
             display: none;
             position: absolute;
@@ -100,10 +104,22 @@
     }
 }
 
-.shrink-out {
-    animation: shrinkOut 0.4s ease-out forwards;
+.grow-in {
+    opacity: 0;
+    transform: scale(0);
+}
+.grow-in-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
 }
 
-.grow-in {
-    animation: growIn 0.4s ease-out forwards;
+.shrink-out {
+    opacity: 1;
+    transform: scale(1);
+}
+.shrink-out-active {
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
 }
