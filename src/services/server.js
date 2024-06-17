@@ -1,7 +1,7 @@
 import { createServer, Model } from "miragejs";
 
 export function makeServer() {
-	createServer({
+	return createServer({
 		timing: 3000,
 		models: {
 			skill: Model,
@@ -13,10 +13,8 @@ export function makeServer() {
 
 			if (storedSkills.length === 0) {
 				server.create("skill", { name: "HTML", range: 100 });
-				server.create("skill", { name: "CSS", range: 75 });
-				server.create("skill", { name: "jQuery", range: 60 });
-				server.create("skill", { name: "PHP", range: 50 });
-				server.create("skill", { name: "Laravel 2", range: 30 });
+				server.create("skill", { name: "CSS", range: 95 });
+				server.create("skill", { name: "React", range: 70 });
 			}
 		},
 
