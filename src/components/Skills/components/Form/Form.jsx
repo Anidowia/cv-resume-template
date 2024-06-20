@@ -64,7 +64,11 @@ const Form = ({ isClosed, onCloseForm }) => {
 				onSubmit={onSubmit}
 			>
 				{(formik) => (
-					<form onSubmit={formik.handleSubmit} className="form__info">
+					<form
+						onSubmit={formik.handleSubmit}
+						className="form__info"
+						data-testid="form"
+					>
 						<div className={styles.name}>
 							<label htmlFor="name">Skill name:</label>
 							<Input

@@ -1,38 +1,26 @@
-import React, { useState, useEffect, useRef } from "react";
-import { v4 as uuidv4 } from "uuid";
+import React, { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+
+import { setFilterKey } from "../../store/slices/portfolioSlice";
 
 import Info from "../Info/Info";
 import styles from "./Portfolio.module.scss";
 
-const projects = [
-	{ id: uuidv4(), title: "Project 1", category: "ui" },
-	{ id: uuidv4(), title: "Project 2", category: "code" },
-	{ id: uuidv4(), title: "Project 3", category: "ui" },
-	{ id: uuidv4(), title: "Project 4", category: "code" },
-];
-
-const filterItems = [
-	{ label: "All", key: "all" },
-	{ label: "Code", key: "code" },
-	{ label: "UI", key: "ui" },
-];
-
 const Portfolio = ({ title, isClosed }) => {
-	const [filterKey, setFilterKey] = useState("all");
-	const [projectsToShow, setProjectsToShow] = useState(projects);
+	const dispatch = useDispatch();
+	const { projects, filterItems, filterKey } = useSelector(
+		(state) => state.portfolio
+	);
 	const nodeRefs = useRef(new Map());
 
-	useEffect(() => {
-		const filteredProjects =
-			filterKey === "all"
-				? projects
-				: projects.filter((project) => project.category === filterKey);
-		setProjectsToShow(filteredProjects);
-	}, [filterKey]);
+	const projectsToShow =
+		filterKey === "all"
+			? projects
+			: projects.filter((project) => project.category === filterKey);
 
 	const handleFilterKeyChange = (key) => {
-		setFilterKey(key);
+		dispatch(setFilterKey(key));
 	};
 
 	return (

@@ -1,7 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
+
 import skillsReducer, { fetchSkills } from "../store/slices/skillsSlice";
 
-describe("skills slice", () => {
+describe("Skills slice", () => {
 	let store;
 
 	beforeEach(() => {

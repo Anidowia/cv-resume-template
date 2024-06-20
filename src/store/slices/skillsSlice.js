@@ -6,26 +6,61 @@ export const fetchSkills = createAsyncThunk("skills/fetchSkills", async () => {
 	return data.skills;
 });
 
+const initialState = {
+	chartData: {
+		labels: [],
+		datasets: [
+			{
+				label: "Skill Level",
+				data: [],
+				backgroundColor: "rgba(38, 193, 126, 1)",
+				borderColor: "rgba(38, 193, 126, 1)",
+				borderWidth: 1,
+				borderRadius: 4,
+				borderSkipped: false,
+			},
+		],
+	},
+	loading: false,
+	error: null,
+	options: {
+		indexAxis: "y",
+		elements: {
+			bar: {
+				borderWidth: 2,
+			},
+		},
+		responsive: true,
+		plugins: {
+			legend: {
+				display: false,
+			},
+			title: {
+				display: true,
+			},
+		},
+		scales: {
+			x: {
+				beginAtZero: true,
+				max: 100,
+				ticks: {},
+				grid: {
+					display: false,
+				},
+			},
+			y: {
+				grid: {
+					display: false,
+				},
+			},
+		},
+		barPercentage: 0.7,
+	},
+};
+
 const skillsSlice = createSlice({
 	name: "skills",
-	initialState: {
-		chartData: {
-			labels: [],
-			datasets: [
-				{
-					label: "Skill Level",
-					data: [],
-					backgroundColor: "rgba(38, 193, 126, 1)",
-					borderColor: "rgba(38, 193, 126, 1)",
-					borderWidth: 1,
-					borderRadius: 4,
-					borderSkipped: false,
-				},
-			],
-		},
-		loading: false,
-		error: null,
-	},
+	initialState,
 	reducers: {},
 	extraReducers: (builder) => {
 		builder

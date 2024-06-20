@@ -2,6 +2,11 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { fetchSkills } from "../../store/slices/skillsSlice";
+import {
+	renderSpinner,
+	renderError,
+	getTickLabel,
+} from "../../helpers/helpers";
 
 import { Bar } from "react-chartjs-2";
 import {
@@ -14,9 +19,6 @@ import {
 	Legend,
 } from "chart.js";
 import { BorderColor } from "@mui/icons-material";
-
-import { renderSpinner, renderError } from "../../helpers/helpers";
-import { options } from "./components/Skillsdata";
 
 import Button from "../Button/Button";
 import Form from "./components/Form/Form";
@@ -35,7 +37,9 @@ ChartJS.register(
 const Skills = ({ title, isClosed }) => {
 	const [isFormOpen, setIsFormOpen] = useState(false);
 	const dispatch = useDispatch();
-	const { chartData, loading, error } = useSelector((state) => state.skills);
+	const { chartData, loading, error, options } = useSelector(
+		(state) => state.skills
+	);
 
 	useEffect(() => {
 		dispatch(fetchSkills());
@@ -49,13 +53,27 @@ const Skills = ({ title, isClosed }) => {
 		setIsFormOpen(false);
 	};
 
+	const chartOptions = {
+		...options,
+		scales: {
+			...options.scales,
+			x: {
+				...options.scales.x,
+				ticks: {
+					...options.scales.x.ticks,
+					callback: getTickLabel,
+				},
+			},
+		},
+	};
+
 	const renderContent = isFormOpen ? (
 		<Form isClosed={isClosed} onCloseForm={handleCloseForm} />
 	) : (
 		<>
 			{renderSpinner(loading)}
 			{renderError(error)}
-			{!loading && !error && <Bar data={chartData} options={options} />}
+			{!loading && !error && <Bar data={chartData} options={chartOptions} />}
 		</>
 	);
 
@@ -72,7 +90,6 @@ const Skills = ({ title, isClosed }) => {
 					onClick={handleClick}
 				/>
 			</div>
-
 			<div className={styles.chartContainer}>{renderContent}</div>
 		</section>
 	);
