@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchSkills } from "../../store/slices/skillsSlice";
 import {
-	renderSpinner,
-	renderError,
-	getTickLabel,
-} from "../../helpers/helpers";
+	addSkill,
+	fetchSkills,
+	initializeSkills,
+} from "../../store/slices/skillsSlice";
+import { renderSpinner, renderError } from "../../helpers/helpers";
 
 import { Bar } from "react-chartjs-2";
 import {
@@ -24,6 +24,7 @@ import Button from "../Button/Button";
 import Form from "./components/Form/Form";
 
 import styles from "./Skills.module.scss";
+import { ChartData, chartOptions } from "./chartData";
 
 ChartJS.register(
 	CategoryScale,
@@ -37,9 +38,11 @@ ChartJS.register(
 const Skills = ({ title, isClosed }) => {
 	const [isFormOpen, setIsFormOpen] = useState(false);
 	const dispatch = useDispatch();
-	const { chartData, loading, error, options } = useSelector(
-		(state) => state.skills
-	);
+	const { skills, loading, error } = useSelector((state) => state.skills);
+
+	useEffect(() => {
+		dispatch(initializeSkills());
+	}, [dispatch]);
 
 	useEffect(() => {
 		dispatch(fetchSkills());
@@ -53,22 +56,18 @@ const Skills = ({ title, isClosed }) => {
 		setIsFormOpen(false);
 	};
 
-	const chartOptions = {
-		...options,
-		scales: {
-			...options.scales,
-			x: {
-				...options.scales.x,
-				ticks: {
-					...options.scales.x.ticks,
-					callback: getTickLabel,
-				},
-			},
-		},
+	const handleAddSkill = (newSkill) => {
+		dispatch(addSkill(newSkill));
 	};
 
+	const chartData = ChartData(skills);
+
 	const renderContent = isFormOpen ? (
-		<Form isClosed={isClosed} onCloseForm={handleCloseForm} />
+		<Form
+			isClosed={isClosed}
+			onCloseForm={handleCloseForm}
+			onAddSkill={handleAddSkill}
+		/>
 	) : (
 		<>
 			{renderSpinner(loading)}

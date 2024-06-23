@@ -10,12 +10,6 @@ export function makeServer() {
 		seeds(server) {
 			const storedSkills = JSON.parse(localStorage.getItem("skills")) || [];
 			storedSkills.forEach((skill) => server.create("skill", skill));
-
-			if (storedSkills.length === 0) {
-				server.create("skill", { name: "HTML", range: 100 });
-				server.create("skill", { name: "CSS", range: 95 });
-				server.create("skill", { name: "React", range: 70 });
-			}
 		},
 
 		routes() {
@@ -46,18 +40,18 @@ export function makeServer() {
 			this.get("/experience", () => ({
 				experience: [
 					{
-						date: "2013-2014",
+						date: "2023-2024",
 						info: {
-							company: "Google",
-							job: "Front-end developer / PHP programmer",
+							company: "EPAM",
+							job: "Front-end developer intern",
 							description:
 								"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor",
 						},
 					},
 					{
-						date: "2012",
+						date: "2022",
 						info: {
-							company: "Twitter",
+							company: "GOSU LTD",
 							job: "Web developer",
 							description:
 								"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor",

@@ -1,4 +1,4 @@
-@import "../../../assets/styles/modules/variables.module.scss";
+@import "../../../../../assets/styles/modules/variables.module.scss";
 
 .spinner {
     width: 50px;
@@ -45,12 +45,3 @@
   }
 }
 
-.spinnerContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.error {
-  color: red;
-}

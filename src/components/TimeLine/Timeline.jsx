@@ -1,9 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import { renderError, renderSpinner } from "../../helpers/helpers";
 import { fetchEducation } from "../../store/slices/educationSlice";
-
-import LoadingSpinner from "../../pages/Inner/components/LoadingSpinner";
 
 import styles from "./Timeline.module.scss";
 
@@ -16,14 +15,6 @@ const Timeline = ({ title, isClosed }) => {
 	useEffect(() => {
 		dispatch(fetchEducation());
 	}, [dispatch]);
-
-	const renderSpinner = loading && (
-		<div className={styles.spinnerContainer}>
-			<LoadingSpinner />
-		</div>
-	);
-
-	const renderError = error && <div className={styles.error}>{error}</div>;
 
 	const renderTimelineEvents =
 		!loading &&
@@ -45,8 +36,8 @@ const Timeline = ({ title, isClosed }) => {
 		>
 			<h1>{title}</h1>
 
-			{renderSpinner}
-			{renderError}
+			{renderSpinner(loading)}
+			{renderError(error)}
 			{renderTimelineEvents}
 		</section>
 	);

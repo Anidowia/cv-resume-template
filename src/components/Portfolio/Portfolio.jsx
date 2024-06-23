@@ -26,7 +26,7 @@ const Portfolio = ({ title, isClosed }) => {
 	return (
 		<section
 			className={`${styles.portfolio} ${isClosed ? styles.portfolioShifted : ""}`}
-			id="skills"
+			id="workExperience"
 		>
 			<h1>{title}</h1>
 			<div className={styles["portfolio__links"]}>

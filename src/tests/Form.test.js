@@ -10,7 +10,6 @@ import store from "../store";
 
 fetchMock.enableMocks();
 
-// Redux work check
 jest.mock("react-redux", () => ({
 	...jest.requireActual("react-redux"),
 	useDispatch: jest.fn(),

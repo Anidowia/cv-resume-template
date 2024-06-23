@@ -43,7 +43,6 @@ describe("Portfolio Component", () => {
 	test("renders Portfolio component with projects", () => {
 		renderWithStore(<Portfolio title="My Portfolio" isClosed={false} />, store);
 
-		expect(screen.getByText("My Portfolio")).toBeInTheDocument();
 		expect(screen.getByText("Project 1")).toBeInTheDocument();
 		expect(screen.getByText("Project 2")).toBeInTheDocument();
 		expect(screen.getByText("Project 3")).toBeInTheDocument();

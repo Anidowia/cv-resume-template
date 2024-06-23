@@ -7,61 +7,30 @@ export const fetchSkills = createAsyncThunk("skills/fetchSkills", async () => {
 });
 
 const initialState = {
-	chartData: {
-		labels: [],
-		datasets: [
-			{
-				label: "Skill Level",
-				data: [],
-				backgroundColor: "rgba(38, 193, 126, 1)",
-				borderColor: "rgba(38, 193, 126, 1)",
-				borderWidth: 1,
-				borderRadius: 4,
-				borderSkipped: false,
-			},
-		],
-	},
+	skills: [],
 	loading: false,
 	error: null,
-	options: {
-		indexAxis: "y",
-		elements: {
-			bar: {
-				borderWidth: 2,
-			},
-		},
-		responsive: true,
-		plugins: {
-			legend: {
-				display: false,
-			},
-			title: {
-				display: true,
-			},
-		},
-		scales: {
-			x: {
-				beginAtZero: true,
-				max: 100,
-				ticks: {},
-				grid: {
-					display: false,
-				},
-			},
-			y: {
-				grid: {
-					display: false,
-				},
-			},
-		},
-		barPercentage: 0.7,
-	},
 };
 
 const skillsSlice = createSlice({
 	name: "skills",
 	initialState,
-	reducers: {},
+	reducers: {
+		initializeSkills: (state) => {
+			const storedSkills = JSON.parse(localStorage.getItem("skills")) || [];
+			if (storedSkills.length === 0) {
+				storedSkills.push({ name: "HTML", range: 100 });
+				storedSkills.push({ name: "CSS", range: 95 });
+				storedSkills.push({ name: "React", range: 70 });
+				localStorage.setItem("skills", JSON.stringify(storedSkills));
+			}
+			state.skills = storedSkills;
+		},
+		addSkill: (state, action) => {
+			state.skills.push(action.payload);
+			localStorage.setItem("skills", JSON.stringify(state.skills));
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(fetchSkills.pending, (state) => {
@@ -69,10 +38,7 @@ const skillsSlice = createSlice({
 				state.error = null;
 			})
 			.addCase(fetchSkills.fulfilled, (state, action) => {
-				const labels = action.payload.map((skill) => skill.name);
-				const skillLevels = action.payload.map((skill) => skill.range);
-				state.chartData.labels = labels;
-				state.chartData.datasets[0].data = skillLevels;
+				state.skills = action.payload;
 				state.loading = false;
 			})
 			.addCase(fetchSkills.rejected, (state, action) => {
@@ -81,5 +47,7 @@ const skillsSlice = createSlice({
 			});
 	},
 });
+
+export const { initializeSkills, addSkill } = skillsSlice.actions;
 
 export default skillsSlice.reducer;
